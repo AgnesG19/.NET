@@ -1,0 +1,13 @@
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\GenteFit.exe.config
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\GenteFit.exe
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\GenteFit.pdb
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\System.Data.SqlClient.dll
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\System.Data.SqlClient.xml
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.AssemblyReference.cache
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.SuggestedBindingRedirects.cache
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.Properties.Resources.resources
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.GenerateResource.cache
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.CoreCompileInputs.cache
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.CopyComplete
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.exe
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.pdb
