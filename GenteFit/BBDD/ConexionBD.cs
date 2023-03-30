@@ -13,7 +13,7 @@ namespace GenteFit.BBDD
 
         public ConexionBD()
         {
-            this.BD = new SqlConnection("Server=Franky-PC\\NET ; DataBase=GenteFITBD");
+            this.BD = new SqlConnection("Data Source=Franky-PC\\NET ; Initial Catalog=GenteFITBD");
         }
 
         public bool Conectar()
@@ -21,6 +21,7 @@ namespace GenteFit.BBDD
             try
             {
                 this.BD.Open();
+                ImprimirEstadoConexion();
                 return true;
             }catch(SqlException ex)
             {
@@ -30,6 +31,7 @@ namespace GenteFit.BBDD
         public void Desconectar()
         {
             this.BD.Close();
+            ImprimirEstadoConexion();
         }
 
         private void ImprimirEstadoConexion()
@@ -37,4 +39,5 @@ namespace GenteFit.BBDD
             Console.WriteLine("El estado de la conexión es: " + this.BD.State.ToString());
         }
     }
+
 }
