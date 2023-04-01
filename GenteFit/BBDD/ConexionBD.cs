@@ -13,7 +13,7 @@ namespace GenteFit.BBDD
 
         public ConexionBD()
         {
-            this.BD = new SqlConnection("Data Source=Franky-PC\\NET ; Initial Catalog=GenteFITBD");
+            this.BD = new SqlConnection("Server=Franky-PC\\NET ; Database=GenteFITBD ; userID=Franky-PC\\Franky ; Password=;");
         }
 
         public bool Conectar()
