@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace GenteFit
 {
-    internal static class Program
+    internal static class Formulario
     {
         /// <summary>
         /// Punto de entrada principal para la aplicación.
@@ -18,5 +18,7 @@ namespace GenteFit
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form2());
         }
+
+ 
     }
 }

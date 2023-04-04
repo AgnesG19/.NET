@@ -17,17 +17,19 @@ namespace GenteFit.XML
         
         public void GenerarXML()
         {
-            //Falta paquete para sqlCommand
+            //Hace conexion con la BD
             SqlConnection connection = new SqlConnection("connectionString");
             connection.Open();
 
+            //Muestra de la tabla CLIENTE
             SqlCommand command = new SqlCommand("SELECT * FROM Cliente", connection);
             SqlDataAdapter adapter = new SqlDataAdapter(command);
 
             DataSet dataSet = new DataSet();
             adapter.Fill(dataSet);
 
-            XmlTextWriter writer = new XmlTextWriter("archivo.xml", Encoding.UTF8);
+            //Genera XML de CLIENTE
+            XmlTextWriter writer = new XmlTextWriter("ClienteDatosXML.xml", Encoding.UTF8);
             dataSet.WriteXml(writer);
             writer.Close();
 
