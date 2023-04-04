@@ -20,5 +20,7 @@ namespace GenteFit
         public Nullable<int> TelefonoCli { get; set; }
         public string MailCli { get; set; }
         public string ContrasenaPerfil { get; set; }
+        public Nullable<int> ReservasActivas { get; set; }
+        public Nullable<int> ColaReserva { get; set; }
     }
 }
