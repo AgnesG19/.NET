@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfClientes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="www.w3.org/2001/XMLSchema">
+	<Clientes>
+		<IDCliente>201</IDCliente>
+		<NombreCli>Ana</NombreCli>
+		<ApellidoCli>Perez</ApellidoCli>
+		<TelefonoCli>611111111</TelefonoCli>
+		<MailCli>anaperez@gmail.com</MailCli>
+		<ContrasenaPerfil>anaperez</ContrasenaPerfil>
+		<ReservasActivas>2</ReservasActivas>
+		<ColaReserva>1</ColaReserva>
+	</Clientes>
+</ArrayOfClientes>

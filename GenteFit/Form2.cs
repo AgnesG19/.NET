@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//archivo que tiene la funcion
+using GenteFit.XML;
 
 namespace GenteFit
 {
@@ -15,6 +17,12 @@ namespace GenteFit
         public Form2()
         {
             InitializeComponent();
+
+            //Creo instancia de la clase que tiene la funcion
+            ClienteXML CliXML = new ClienteXML();
+            CliXML.GenerarXML();
+
+
         }
 
         private void InitializeComponent()

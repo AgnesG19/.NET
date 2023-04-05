@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Xml.Linq;
 
+using GenteFit.BBDD;
+
 namespace GenteFit.XML
 {
     public class ClienteXML
@@ -17,12 +19,12 @@ namespace GenteFit.XML
         
         public void GenerarXML()
         {
-            //Hace conexion con la BD
-            SqlConnection connection = new SqlConnection("connectionString");
-            connection.Open();
+            /Hace conexion con la BD
+            SqlConnection conexion = new SqlConnection("connectionString");
+            conexion.Open();
 
             //Muestra de la tabla CLIENTE
-            SqlCommand command = new SqlCommand("SELECT * FROM Cliente", connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM Cliente", conexion);
             SqlDataAdapter adapter = new SqlDataAdapter(command);
 
             DataSet dataSet = new DataSet();
@@ -33,7 +35,7 @@ namespace GenteFit.XML
             dataSet.WriteXml(writer);
             writer.Close();
 
-            connection.Close();
+            conexion.Close();
 
         }
             
