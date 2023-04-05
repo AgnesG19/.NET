@@ -11,3 +11,9 @@ A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.CoreCompileInp
 A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.csproj.CopyComplete
 A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.exe
 A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.pdb
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.Form2.resources
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.dll
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.SqlServer.dll
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.xml
+A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.SqlServer.xml
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.Form1.resources

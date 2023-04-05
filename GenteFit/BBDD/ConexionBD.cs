@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace GenteFit.BBDD
@@ -13,7 +14,8 @@ namespace GenteFit.BBDD
 
         public ConexionBD()
         {
-            this.BD = new SqlConnection("Server=Franky-PC\\NET ; Database=GenteFITBD ; userID=Franky-PC\\Franky ; Password=;");
+            //this.BD = new SqlConnection("Server=FRANKY-PC\\NET;Database=GenteFITBD;user ID=Franky-PC\\Franky;Password=;");
+            this.BD = new SqlConnection("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
         }
 
         public bool Conectar()
@@ -21,7 +23,6 @@ namespace GenteFit.BBDD
             try
             {
                 this.BD.Open();
-                ImprimirEstadoConexion();
                 return true;
             }catch(SqlException ex)
             {
@@ -31,13 +32,9 @@ namespace GenteFit.BBDD
         public void Desconectar()
         {
             this.BD.Close();
-            ImprimirEstadoConexion();
+            
         }
-
-        private void ImprimirEstadoConexion()
-        {
-            Console.WriteLine("El estado de la conexión es: " + this.BD.State.ToString());
-        }
+    
     }
 
 }

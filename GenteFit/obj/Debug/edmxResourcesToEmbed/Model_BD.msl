@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GenteFITBDModel1StoreContainer" CdmEntityContainer="GenteFITBDEntities1">
+    <EntitySetMapping Name="Administrador">
+      <EntityTypeMapping TypeName="GenteFITBDModel1.Administrador">
+        <MappingFragment StoreEntitySet="Administrador">
+          <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+          <ScalarProperty Name="MailAdmin" ColumnName="MailAdmin" />
+          <ScalarProperty Name="ContrasenaAdmin" ColumnName="ContrasenaAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="GenteFITBDModel1.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+          <ScalarProperty Name="NombreCli" ColumnName="NombreCli" />
+          <ScalarProperty Name="ApellidoCli" ColumnName="ApellidoCli" />
+          <ScalarProperty Name="TelefonoCli" ColumnName="TelefonoCli" />
+          <ScalarProperty Name="MailCli" ColumnName="MailCli" />
+          <ScalarProperty Name="ContrasenaPerfil" ColumnName="ContrasenaPerfil" />
+          <ScalarProperty Name="ReservasActivas" ColumnName="ReservasActivas" />
+          <ScalarProperty Name="ColaReserva" ColumnName="ColaReserva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructor">
+      <EntityTypeMapping TypeName="GenteFITBDModel1.Instructor">
+        <MappingFragment StoreEntitySet="Instructor">
+          <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+          <ScalarProperty Name="IDInstructor" ColumnName="IDInstructor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="NombreAct" ColumnName="NombreAct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="GenteFITBDModel1.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actividades">
+      <EntityTypeMapping TypeName="GenteFITBDModel1.Actividades">
+        <MappingFragment StoreEntitySet="Actividades">
+          <ScalarProperty Name="IDActividad" ColumnName="IDActividad" />
+          <ScalarProperty Name="NombreAct" ColumnName="NombreAct" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Plazas" ColumnName="Plazas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
