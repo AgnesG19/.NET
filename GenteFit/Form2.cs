@@ -19,8 +19,8 @@ namespace GenteFit
             InitializeComponent();
 
             //Creo instancia de la clase que tiene la funcion
-            ClienteXML CliXML = new ClienteXML();
-            CliXML.GenerarXML();
+            ClientesXML CliXML = new ClientesXML();
+            CliXML.LeerClientes();
 
 
         }

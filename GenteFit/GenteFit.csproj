@@ -71,6 +71,7 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>Model_BD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,7 +107,7 @@
     <Compile Include="Usuarios.cs">
       <DependentUpon>Model_BD.tt</DependentUpon>
     </Compile>
-    <Compile Include="XML\ClienteXML.cs" />
+    <Compile Include="XML\ClientesXML.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
