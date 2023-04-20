@@ -19,7 +19,7 @@ namespace GenteFit
             InitializeComponent();
 
             //Creo instancia de la clase que tiene la funcion
-            ClientesXML CliXML = new ClientesXML();
+            ClientesXML CliXML = new ClientesXML(@"A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml");
             CliXML.LeerClientes();
 
 
@@ -29,8 +29,7 @@ namespace GenteFit
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
@@ -53,22 +52,21 @@ namespace GenteFit
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dataGridView1
+            // listBox1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(39, 126);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(859, 465);
-            this.dataGridView1.TabIndex = 2;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(39, 109);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(848, 459);
+            this.listBox1.TabIndex = 2;
             // 
             // Form2
             // 
             this.ClientSize = new System.Drawing.Size(939, 694);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form2";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -81,6 +79,17 @@ namespace GenteFit
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ListBox1_TextChanged(object sender, EventArgs e)
+        {
+            var clientesXML = new ClientesXML(@"A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml");
+            var clientes = clientesXML.LeerClientes();
+
+            foreach (var cliente in clientes)
+            {
+                listBox1.Items.Add(cliente.IDCliente + " - " + cliente.NombreCli + " " + cliente.ApellidoCli);
+            }
         }
     }
 }

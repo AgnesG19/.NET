@@ -13,16 +13,13 @@ using System.Xml.Serialization;
 
 using GenteFit.BBDD;
 using System.IO;
+using GenteFit.Entidades;
 
 namespace GenteFit.XML
 {
     public class ClientesXML
     {
         private readonly string fileName;
-
-        public ClientesXML()
-        {
-        }
 
         public ClientesXML(string fileName)
         {
@@ -31,16 +28,55 @@ namespace GenteFit.XML
 
         public List<Cliente> LeerClientes()
         {
-            var xml = new XmlSerializer(typeof(List<Cliente>));
-            using var file = File.OpenRead(fileName);
+            var xml = new XmlSerializer(typeof(List<Cliente>), new XmlRootAttribute("Clientes"));
+            using (var file = File.OpenRead(fileName))
 
-            return (List<Cliente>)xml.Deserialize(file);
+                return (List<Cliente>)xml.Deserialize(file);
         }
-
     }
+
+    //USANDO ARRAY
+    //    public List<Entidades.Cliente> LeerClientes()
+    //    {
+    //        //List<Cliente> clientes = new List<Cliente>();
+    //        List<Entidades.Cliente> clientes = new List<Entidades.Cliente>();
+
+    //        XmlSerializer xml = new XmlSerializer(typeof(ArrayOfClientes));
+    //        using (FileStream file = new FileStream("A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml", FileMode.Open))
+    //        {
+    //            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+    //            namespaces.Add("", "http://www.example.com/Clientes");
+    //            ArrayOfClientes array = (ArrayOfClientes)xml.Deserialize(file);
+    //            clientes = array.Clientes;
+    //        }
+    //        return clientes;
+    //    }
+    //}
+
+    //ERROR
+    //public class ClientesXML
+    //{
+    //    private readonly string fileName;
+
+    //    public ClientesXML(string fileName)
+    //    {
+    //        this.fileName = fileName;
+    //    }
+
+    //    public List<Cliente> LeerClientes()
+    //    {
+    //        var xml = new XmlSerializer(typeof(List<Cliente>));
+    //        using (var file = File.OpenRead(fileName))
+
+    //            return (List<Cliente>)xml.Deserialize(file);
+    //    }
+
+    //}
+
+    //PRIMER INTENTO
     //public class ClienteXML
     //{
-        
+
     //    public void GenerarXML()
     //    {
     //        //Hace conexion con la BD

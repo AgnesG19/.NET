@@ -1,13 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfClientes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="www.w3.org/2001/XMLSchema">
+﻿<?xml version="1.0" encoding="UTF-8"?>
 	<Clientes>
-		<IDCliente>201</IDCliente>
-		<NombreCli>Ana</NombreCli>
-		<ApellidoCli>Perez</ApellidoCli>
-		<TelefonoCli>611111111</TelefonoCli>
-		<MailCli>anaperez@gmail.com</MailCli>
-		<ContrasenaPerfil>anaperez</ContrasenaPerfil>
-		<ReservasActivas>2</ReservasActivas>
-		<ColaReserva>1</ColaReserva>
+		<Cliente id="1">
+			<IDCliente>201</IDCliente>
+			<NombreCli>Ana</NombreCli>
+			<ApellidoCli>Perez</ApellidoCli>
+			<TelefonoCli>611111111</TelefonoCli>
+			<MailCli>anaperez@gmail.com</MailCli>
+			<ContrasenaPerfil>anaperez</ContrasenaPerfil>
+			<ReservasActivas>2</ReservasActivas>
+			<ColaReserva>1</ColaReserva>
+		</Cliente>
+		<Cliente id="2">
+			<IDCliente>202</IDCliente>
+			<NombreCli>Paco</NombreCli>
+			<ApellidoCli>Sanz</ApellidoCli>
+			<TelefonoCli>62222222</TelefonoCli>
+			<MailCli>pacosanz@gmail.com</MailCli>
+			<ContrasenaPerfil>pacosanz</ContrasenaPerfil>
+			<ReservasActivas>3</ReservasActivas>
+			<ColaReserva>1</ColaReserva>
+		</Cliente>
 	</Clientes>
-</ArrayOfClientes>
+
