@@ -20,8 +20,8 @@
             base.Dispose(disposing);
         }
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_Borrar;
+        private System.Windows.Forms.Button button_ListaClientes;
         private System.Windows.Forms.ListBox listBox1;
     }
 }
