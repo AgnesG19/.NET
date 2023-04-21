@@ -18,11 +18,6 @@ namespace GenteFit
         {
             InitializeComponent();
 
-            //Creo instancia de la clase que tiene la funcion
-            ClientesXML CliXML = new ClientesXML(@"A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml");
-            CliXML.LeerClientes();
-
-
         }
 
         private void InitializeComponent()
@@ -74,35 +69,20 @@ namespace GenteFit
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            // Limpiar los elementos en la ListBox
+            listBox1.Items.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear(); // Limpiamos la lista antes de agregar los elementos
+            listBox1.Items.Clear(); // Limpiamos la lista antes de agregar los elementos por si queda algo de una vista anterior.
             ClientesXML cliXML = new ClientesXML(@"A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml");
             List<Cliente> clientes = cliXML.LeerClientes();
             foreach (Cliente cliente in clientes)
             {
-                listBox1.Items.Add(cliente.IDCliente + " - " + cliente.NombreCli + " " + cliente.ApellidoCli + " - " + cliente.TelefonoCli + " - " + cliente.MailCli + " - " + cliente.ContrasenaPerfil + " - " + cliente.ColaReserva);
+                listBox1.Items.Add(cliente.IDCliente + " - " + cliente.NombreCli + " " + cliente.ApellidoCli + " - " + cliente.TelefonoCli + " - " + cliente.MailCli + " - " + cliente.ContrasenaPerfil + " - " + cliente.ReservasActivas + " - " + cliente.ColaReserva);
             }
         }
-
-        
-
-
-
-        //private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("Ejecutando");
-        //    ClientesXML cliXML = new ClientesXML(@"A:\Program Files\Code\NET\.NET\GenteFit\XML\Clientes.xml");
-        //    List<Cliente> clientes = cliXML.LeerClientes();
-        //    foreach (Cliente cliente in clientes)
-        //    {
-        //        listBox1.Items.Add(cliente.IDCliente + " - " + cliente.NombreCli + " " + cliente.ApellidoCli + " - " + cliente.TelefonoCli + " - " + cliente.MailCli + " - " + cliente.ContrasenaPerfil);
-        //    }
-        //}
-
         
     }
 }

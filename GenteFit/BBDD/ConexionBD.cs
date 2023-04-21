@@ -14,7 +14,6 @@ namespace GenteFit.BBDD
 
         public ConexionBD()
         {
-            //this.BD = new SqlConnection("Server=FRANKY-PC\\NET;Database=GenteFITBD;user ID=Franky-PC\\Franky;Password=;");
             this.BD = new SqlConnection("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
         }
 

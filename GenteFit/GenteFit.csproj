@@ -71,7 +71,10 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>Model_BD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\Actividades.cs" />
+    <Compile Include="Entidades\Administrador.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Instructor.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

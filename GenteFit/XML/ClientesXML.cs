@@ -53,25 +53,6 @@ namespace GenteFit.XML
     //    }
     //}
 
-    //ERROR
-    //public class ClientesXML
-    //{
-    //    private readonly string fileName;
-
-    //    public ClientesXML(string fileName)
-    //    {
-    //        this.fileName = fileName;
-    //    }
-
-    //    public List<Cliente> LeerClientes()
-    //    {
-    //        var xml = new XmlSerializer(typeof(List<Cliente>));
-    //        using (var file = File.OpenRead(fileName))
-
-    //            return (List<Cliente>)xml.Deserialize(file);
-    //    }
-
-    //}
 
     //PRIMER INTENTO
     //public class ClienteXML
