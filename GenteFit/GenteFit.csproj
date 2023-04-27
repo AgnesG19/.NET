@@ -71,6 +71,7 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>Model_BD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Consultas\ClientesConsultas.cs" />
     <Compile Include="Entidades\Actividades.cs" />
     <Compile Include="Entidades\Administrador.cs" />
     <Compile Include="Entidades\Cliente.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EntityDeploy Include="Model_BD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -158,6 +160,7 @@
       <DependentUpon>Model_BD.edmx</DependentUpon>
       <LastGenOutput>Model_BD.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\background.jpg" />
     <Content Include="XML\Clientes.xml" />
   </ItemGroup>
   <ItemGroup>

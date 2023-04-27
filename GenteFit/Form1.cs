@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//*Importamos para que puda leer los metodos
+﻿//*Importamos para que puda leer los metodos
 using GenteFit.BBDD;
+using System;
 using System.Windows.Forms;
 
 namespace GenteFit
@@ -28,9 +21,32 @@ namespace GenteFit
             {
                 textBox1.Text = "Conexión erronea BBDD";
             }
-                
+
 
         }
-    
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label2_Email.Visible = true;
+            textBox2_Email.Visible = true;
+            label2_Contrasena.Visible = true;
+            textBox3_Contrasena.Visible = true;
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
