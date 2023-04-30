@@ -12,6 +12,7 @@ namespace GenteFit.BBDD
 
         private SqlConnection BD;
 
+
         public ConexionBD()
         {
             this.BD = new SqlConnection("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
@@ -33,7 +34,13 @@ namespace GenteFit.BBDD
             this.BD.Close();
             
         }
-    
+
+        public SqlConnection GetConnection()
+        {
+            return BD;
+        }
+
+
     }
 
 }

@@ -17,8 +17,8 @@ namespace GenteFit
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form2()); //PARA PRODUCTO2 XML
-            Application.Run(new Form1());
+ 
+            Application.Run(new Inicio());
         }
     }
 }

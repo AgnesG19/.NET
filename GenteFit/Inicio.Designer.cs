@@ -1,6 +1,6 @@
 ﻿namespace GenteFit
 {
-    partial class Form1
+    partial class Inicio
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1_InicioSes = new System.Windows.Forms.Button();
             this.button2_Regis = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.label2_Contrasena = new System.Windows.Forms.Label();
             this.textBox2_Email = new System.Windows.Forms.TextBox();
             this.textBox3_Contrasena = new System.Windows.Forms.TextBox();
+            this.button1_Acceder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -133,13 +135,32 @@
             this.textBox3_Contrasena.TabIndex = 7;
             this.textBox3_Contrasena.Visible = false;
             // 
-            // Form1
+            // button1_Acceder
+            // 
+            this.button1_Acceder.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1_Acceder.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1_Acceder.FlatAppearance.BorderSize = 199;
+            this.button1_Acceder.Font = new System.Drawing.Font("Myriad Arabic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1_Acceder.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button1_Acceder.Location = new System.Drawing.Point(621, 563);
+            this.button1_Acceder.Name = "button1_Acceder";
+            this.button1_Acceder.Size = new System.Drawing.Size(224, 51);
+            this.button1_Acceder.TabIndex = 8;
+            this.button1_Acceder.Tag = "Start";
+            this.button1_Acceder.Text = "ACCEDER";
+            this.button1_Acceder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1_Acceder.UseVisualStyleBackColor = false;
+            this.button1_Acceder.Visible = false;
+            this.button1_Acceder.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = global::GenteFit.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(1440, 1023);
+            this.Controls.Add(this.button1_Acceder);
             this.Controls.Add(this.textBox3_Contrasena);
             this.Controls.Add(this.textBox2_Email);
             this.Controls.Add(this.label2_Contrasena);
@@ -148,8 +169,9 @@
             this.Controls.Add(this.button2_Regis);
             this.Controls.Add(this.button1_InicioSes);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Inicio";
+            this.Text = "Inicio";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,6 +188,7 @@
         private System.Windows.Forms.Label label2_Contrasena;
         private System.Windows.Forms.TextBox textBox2_Email;
         private System.Windows.Forms.TextBox textBox3_Contrasena;
+        private System.Windows.Forms.Button button1_Acceder;
     }
 }
 
