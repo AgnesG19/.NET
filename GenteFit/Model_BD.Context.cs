@@ -28,7 +28,6 @@ namespace GenteFit
         public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Instructor> Instructor { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Actividades> Actividades { get; set; }
     }
 }

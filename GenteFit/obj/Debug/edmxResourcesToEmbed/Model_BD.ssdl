@@ -46,22 +46,10 @@ advertencia 6002: La tabla o vista 'GenteFITBD.dbo.Actividades' no tiene definid
     <Property Name="Apellido" Type="varchar" MaxLength="1" />
     <Property Name="NombreAct" Type="varchar" MaxLength="1" />
   </EntityType>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="IdUsuario" />
-    </Key>
-    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Apellidos" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Contraseña" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="TipoUsuario" Type="varchar" MaxLength="20" Nullable="false" />
-  </EntityType>
   <EntityContainer Name="GenteFITBDModel1StoreContainer">
     <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Actividades" EntityType="Self.Actividades" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Actividades].[IDActividad] AS [IDActividad], 

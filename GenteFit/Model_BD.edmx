@@ -51,22 +51,10 @@ advertencia 6002: La tabla o vista 'GenteFITBD.dbo.Actividades' no tiene definid
           <Property Name="Apellido" Type="varchar" MaxLength="1" />
           <Property Name="NombreAct" Type="varchar" MaxLength="1" />
         </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Apellidos" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contraseña" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TipoUsuario" Type="varchar" MaxLength="20" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="GenteFITBDModel1StoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Actividades" EntityType="Self.Actividades" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Actividades].[IDActividad] AS [IDActividad], 
@@ -115,17 +103,6 @@ advertencia 6002: La tabla o vista 'GenteFITBD.dbo.Actividades' no tiene definid
           <Property Name="Apellido" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="NombreAct" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Actividades">
           <Key>
             <PropertyRef Name="IDActividad" />
@@ -143,7 +120,6 @@ advertencia 6002: La tabla o vista 'GenteFITBD.dbo.Actividades' no tiene definid
           <EntitySet Name="Administrador" EntityType="Self.Administrador" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Instructor" EntityType="Self.Instructor" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
           <EntitySet Name="Actividades" EntityType="Self.Actividades" />
         </EntityContainer>
       </Schema>
@@ -183,18 +159,6 @@ advertencia 6002: La tabla o vista 'GenteFITBD.dbo.Actividades' no tiene definid
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="NombreAct" ColumnName="NombreAct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="GenteFITBDModel1.Usuarios">
-              <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

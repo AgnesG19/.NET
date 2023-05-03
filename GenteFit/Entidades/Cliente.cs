@@ -11,16 +11,7 @@ using System.Xml.Serialization;
 
 namespace GenteFit.Entidades
 {
-    //Para XML con Array (no funciona)
-    //[XmlRoot(Namespace = "http://www.example.com/Clientes")]
-    //public class ArrayOfClientes
-    //{
-    //    [XmlElement("Cliente")]
-    //    public List<Cliente> Clientes { get; set; }
-    //}
-
-    //[XmlType(Namespace = "http://www.example.com/Clientes")]
-
+   
     public class Cliente
     {
         public int IDCliente { get; set; }
