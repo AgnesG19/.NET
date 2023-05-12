@@ -67,26 +67,54 @@ namespace GenteFit
 
         }
 
+        //BOTON ACCEDER, primero verifica el tipo de usuario para ir a un Menu o otro
         private void button1_Click_1(object sender, EventArgs e)
         {
             string email = textBox2_Email.Text;
             string contrasena = textBox3_Contrasena.Text;
 
-            ConsultasBD consultas = new ConsultasBD("");
+            ConsultasBD consultas = new ConsultasBD("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
 
+            // Verificar existencia del usuario
             if (consultas.VerificarExistencia(email, contrasena))
             {
-                // Si los datos existen en la base de datos, nos llevara al menú principal
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.Show();
-                this.Hide();
+                // Obtener tipo de usuario
+                string tipoUsuario = consultas.ObtenerTipoUsuario(email);
+
+                // Abrir Menu correspondiente según el tipo de usuario
+                if (tipoUsuario == "Cliente")
+                {
+                    MenuPrincipal MenuPrincipal = new MenuPrincipal();
+                    MenuPrincipal.Show();
+                }
+                else if (tipoUsuario == "Administrador")
+                {
+                    MenuAdmin MenuAdmin = new MenuAdmin();
+                    MenuAdmin.Show();
+                }
             }
             else
             {
-                textBox1.Text="Correo electrónico o contraseña incorrectos";
+                textBox1.Text = "Correo electrónico o contraseña incorrectos";
             }
-
         }
+
+
+        //if (consultas.VerificarExistencia(email, contrasena))
+        //{
+        //    // Si los datos existen en la base de datos, nos llevara al menú principal
+        //    MenuPrincipal menuPrincipal = new MenuPrincipal();
+        //    menuPrincipal.Show();
+        //    this.Hide();
+        //}
+        //else
+        //{
+        //    textBox1.Text="Correo electrónico o contraseña incorrectos";
+        //}
+
+    
+
+
 
         private void label1_Click_1(object sender, EventArgs e)
         {
