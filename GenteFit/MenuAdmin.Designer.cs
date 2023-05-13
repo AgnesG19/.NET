@@ -28,34 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1_ConsultaReservas = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuAdmin));
+            this.button1_ListaEspera = new System.Windows.Forms.Button();
+            this.button2_ConsultarReservas = new System.Windows.Forms.Button();
+            this.label1_AdminSesion = new System.Windows.Forms.Label();
+            this.button3_salir = new System.Windows.Forms.Button();
+            this.comboBox1_Actividades = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // button1_ConsultaReservas
+            // button1_ListaEspera
             // 
-            this.button1_ConsultaReservas.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.button1_ConsultaReservas.Location = new System.Drawing.Point(37, 63);
-            this.button1_ConsultaReservas.Name = "button1_ConsultaReservas";
-            this.button1_ConsultaReservas.Size = new System.Drawing.Size(216, 64);
-            this.button1_ConsultaReservas.TabIndex = 0;
-            this.button1_ConsultaReservas.Text = "Consulta Reservas Clintes";
-            this.button1_ConsultaReservas.UseVisualStyleBackColor = true;
+            this.button1_ListaEspera.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.button1_ListaEspera.Location = new System.Drawing.Point(24, 218);
+            this.button1_ListaEspera.Name = "button1_ListaEspera";
+            this.button1_ListaEspera.Size = new System.Drawing.Size(184, 48);
+            this.button1_ListaEspera.TabIndex = 0;
+            this.button1_ListaEspera.Text = "Lista de Espera";
+            this.button1_ListaEspera.UseVisualStyleBackColor = true;
+            this.button1_ListaEspera.Click += new System.EventHandler(this.button1_ListaEspera_Click);
             // 
-            // MenúAdmin
+            // button2_ConsultarReservas
+            // 
+            this.button2_ConsultarReservas.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.button2_ConsultarReservas.Location = new System.Drawing.Point(24, 378);
+            this.button2_ConsultarReservas.Name = "button2_ConsultarReservas";
+            this.button2_ConsultarReservas.Size = new System.Drawing.Size(184, 53);
+            this.button2_ConsultarReservas.TabIndex = 1;
+            this.button2_ConsultarReservas.Text = "Consultar Reservas";
+            this.button2_ConsultarReservas.UseVisualStyleBackColor = true;
+            // 
+            // label1_AdminSesion
+            // 
+            this.label1_AdminSesion.AutoSize = true;
+            this.label1_AdminSesion.BackColor = System.Drawing.Color.Transparent;
+            this.label1_AdminSesion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1_AdminSesion.Location = new System.Drawing.Point(1202, 24);
+            this.label1_AdminSesion.Name = "label1_AdminSesion";
+            this.label1_AdminSesion.Size = new System.Drawing.Size(105, 13);
+            this.label1_AdminSesion.TabIndex = 2;
+            this.label1_AdminSesion.Text = "Sesión Administrador";
+            this.label1_AdminSesion.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // button3_salir
+            // 
+            this.button3_salir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.button3_salir.Location = new System.Drawing.Point(1326, 15);
+            this.button3_salir.Name = "button3_salir";
+            this.button3_salir.Size = new System.Drawing.Size(91, 28);
+            this.button3_salir.TabIndex = 3;
+            this.button3_salir.Text = "Cerrar Sesión";
+            this.button3_salir.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1_Actividades
+            // 
+            this.comboBox1_Actividades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.comboBox1_Actividades.FormattingEnabled = true;
+            this.comboBox1_Actividades.Location = new System.Drawing.Point(690, 150);
+            this.comboBox1_Actividades.Name = "comboBox1_Actividades";
+            this.comboBox1_Actividades.Size = new System.Drawing.Size(255, 28);
+            this.comboBox1_Actividades.TabIndex = 4;
+            this.comboBox1_Actividades.Visible = false;
+            this.comboBox1_Actividades.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // MenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GenteFit.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(1440, 1023);
-            this.Controls.Add(this.button1_ConsultaReservas);
-            this.Name = "MenúAdmin";
+            this.Controls.Add(this.comboBox1_Actividades);
+            this.Controls.Add(this.button3_salir);
+            this.Controls.Add(this.label1_AdminSesion);
+            this.Controls.Add(this.button2_ConsultarReservas);
+            this.Controls.Add(this.button1_ListaEspera);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MenuAdmin";
             this.Text = "MenúAdmin";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1_ConsultaReservas;
+        private System.Windows.Forms.Button button1_ListaEspera;
+        private System.Windows.Forms.Button button2_ConsultarReservas;
+        private System.Windows.Forms.Label label1_AdminSesion;
+        private System.Windows.Forms.Button button3_salir;
+        private System.Windows.Forms.ComboBox comboBox1_Actividades;
     }
 }

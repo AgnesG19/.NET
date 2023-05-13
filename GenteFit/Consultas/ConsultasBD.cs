@@ -24,7 +24,7 @@ namespace GenteFit.Consultas
 
         }
 
-        //******* FORMS-INICIO APP *******//
+    //******* FORMS-INICIO APP *******//
         //Comprueba si ya existe el Mail y la Contraseña en las tablas CLIENTE Y ADMINISTRADOR (INICIO SESION)
         public bool VerificarExistencia(string email, string contrasena)
         {
@@ -105,7 +105,7 @@ namespace GenteFit.Consultas
                 try
                 {
                     connection.Open();
-                    string query = "SELECT c.IDCliente, c.NombreCli, c.ReservasActivas, c.ColaReserva, a.IDActividad, a.NombreAct, a.Horario " +
+                    string query = "SELECT c.IDCliente, c.NombreCli, c.ReservasActivas, c.ColaReserva, a.IDActividad, a.NombreAct, a.Fecha, a.Hora " +
                                    "FROM CLIENTE c " +
                                    "JOIN Actividades a ON c.IDActividad = a.IDActividad";
                     SqlCommand command = new SqlCommand(query, connection);
