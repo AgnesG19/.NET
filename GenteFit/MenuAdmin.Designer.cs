@@ -34,14 +34,16 @@
             this.label1_AdminSesion = new System.Windows.Forms.Label();
             this.button3_salir = new System.Windows.Forms.Button();
             this.comboBox1_Actividades = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1_ListaEspera
             // 
             this.button1_ListaEspera.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.button1_ListaEspera.Location = new System.Drawing.Point(24, 218);
+            this.button1_ListaEspera.Location = new System.Drawing.Point(23, 298);
             this.button1_ListaEspera.Name = "button1_ListaEspera";
-            this.button1_ListaEspera.Size = new System.Drawing.Size(184, 48);
+            this.button1_ListaEspera.Size = new System.Drawing.Size(185, 75);
             this.button1_ListaEspera.TabIndex = 0;
             this.button1_ListaEspera.Text = "Lista de Espera";
             this.button1_ListaEspera.UseVisualStyleBackColor = true;
@@ -50,9 +52,9 @@
             // button2_ConsultarReservas
             // 
             this.button2_ConsultarReservas.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.button2_ConsultarReservas.Location = new System.Drawing.Point(24, 378);
+            this.button2_ConsultarReservas.Location = new System.Drawing.Point(23, 458);
             this.button2_ConsultarReservas.Name = "button2_ConsultarReservas";
-            this.button2_ConsultarReservas.Size = new System.Drawing.Size(184, 53);
+            this.button2_ConsultarReservas.Size = new System.Drawing.Size(185, 80);
             this.button2_ConsultarReservas.TabIndex = 1;
             this.button2_ConsultarReservas.Text = "Consultar Reservas";
             this.button2_ConsultarReservas.UseVisualStyleBackColor = true;
@@ -81,6 +83,7 @@
             // 
             // comboBox1_Actividades
             // 
+            this.comboBox1_Actividades.AccessibleName = "";
             this.comboBox1_Actividades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.comboBox1_Actividades.FormattingEnabled = true;
             this.comboBox1_Actividades.Location = new System.Drawing.Point(690, 150);
@@ -90,11 +93,21 @@
             this.comboBox1_Actividades.Visible = false;
             this.comboBox1_Actividades.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(282, 278);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 5;
+            // 
             // MenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GenteFit.Properties.Resources.bg_menu;
             this.ClientSize = new System.Drawing.Size(1440, 1023);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1_Actividades);
             this.Controls.Add(this.button3_salir);
             this.Controls.Add(this.label1_AdminSesion);
@@ -103,6 +116,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuAdmin";
             this.Text = "MenúAdmin";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,5 +129,6 @@
         private System.Windows.Forms.Label label1_AdminSesion;
         private System.Windows.Forms.Button button3_salir;
         private System.Windows.Forms.ComboBox comboBox1_Actividades;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

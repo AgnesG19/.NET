@@ -96,32 +96,53 @@ namespace GenteFit.Consultas
         //*******************************************************************************//
 
 
-        //******* FORMS-ADMINISTRADOR *******//
-        //Consultar la lista de espera de los Clientes+Actividad 
-        public DataTable ConsultaListaEspera()
+        //******* FORMS-MENUADMINISTRADOR *******//
+
+        //MOSTRAR LAS ACTIVIDADES en la ComboBox para selecionar luego.
+        public DataTable ConsultaActividades()
         {
-            using (SqlConnection connection = this.conexion.GetConnection())
-            {
-                try
-                {
-                    connection.Open();
-                    string query = "SELECT c.IDCliente, c.NombreCli, c.ReservasActivas, c.ColaReserva, a.IDActividad, a.NombreAct, a.Fecha, a.Hora " +
-                                   "FROM CLIENTE c " +
-                                   "JOIN Actividades a ON c.IDActividad = a.IDActividad";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    reader.Close();
-                    return dt;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al consultar la lista de espera: " + ex.Message);
-                    return null;
-                }
-            }
+            
+            string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            // Crear el comando SQL para obtener las actividades
+            string query = "SELECT IDActividad, NombreAct FROM Actividades";
+            SqlCommand command = new SqlCommand(query, connection);
+
+            // Crear el adaptador de datos y obtener los datos en un DataTable
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            // Devolver el DataTable con los datos de las actividades
+            return dt;
         }
+
+        //Consultar la lista de espera segun la Actividad
+        //public DataTable ConsultaListaEspera()
+        //{
+        //    using (SqlConnection connection = this.conexion.GetConnection())
+        //    {
+        //        try
+        //        {
+        //            connection.Open();
+        //            string query = "SELECT c.IDCliente, c.NombreCli, c.ReservasActivas, c.ColaReserva, a.IDActividad, a.NombreAct, a.Fecha, a.Hora " +
+        //                           "FROM CLIENTE c " +
+        //                           "JOIN Actividades a ON c.IDActividad = a.IDActividad";
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            SqlDataReader reader = command.ExecuteReader();
+        //            DataTable dt = new DataTable();
+        //            dt.Load(reader);
+        //            reader.Close();
+        //            return dt;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Error al consultar la lista de espera: " + ex.Message);
+        //            return null;
+        //        }
+        //    }
+        //}
 
 
 
