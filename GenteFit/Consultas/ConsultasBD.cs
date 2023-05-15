@@ -96,7 +96,7 @@ namespace GenteFit.Consultas
         //*******************************************************************************//
 
 
-        //******* FORMS-MENUADMINISTRADOR *******//
+        //******* FORMS-MENU ADMINISTRADOR *******//
 
         //MOSTRAR LAS ACTIVIDADES en la ComboBox para selecionar luego.
         public DataTable ConsultaActividades()
@@ -118,31 +118,58 @@ namespace GenteFit.Consultas
             return dt;
         }
 
-        //Consultar la lista de espera segun la Actividad
-        //public DataTable ConsultaListaEspera()
-        //{
-        //    using (SqlConnection connection = this.conexion.GetConnection())
-        //    {
-        //        try
-        //        {
-        //            connection.Open();
-        //            string query = "SELECT c.IDCliente, c.NombreCli, c.ReservasActivas, c.ColaReserva, a.IDActividad, a.NombreAct, a.Fecha, a.Hora " +
-        //                           "FROM CLIENTE c " +
-        //                           "JOIN Actividades a ON c.IDActividad = a.IDActividad";
-        //            SqlCommand command = new SqlCommand(query, connection);
-        //            SqlDataReader reader = command.ExecuteReader();
-        //            DataTable dt = new DataTable();
-        //            dt.Load(reader);
-        //            reader.Close();
-        //            return dt;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Error al consultar la lista de espera: " + ex.Message);
-        //            return null;
-        //        }
-        //    }
-        //}
+        //INSERTAR RESERVA en la TABLA RESERVA
+        public void InsertarReserva(int idCliente, int idActividad, DateTime fecha, DateTime hora, int posicion)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO Reservas (IDCliente, IDActividad, Fecha, Hora, Posicion) " +
+                               "VALUES (@idCliente, @idActividad, @fecha, @hora, @posicion)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idCliente", idCliente);
+                    command.Parameters.AddWithValue("@idActividad", idActividad);
+                    command.Parameters.AddWithValue("@fecha", fecha);
+                    command.Parameters.AddWithValue("@hora", hora);
+                    command.Parameters.AddWithValue("@posicion", posicion);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        //Obtener la información de las reservas de UNA ACTIVIDAD ESPECIFICA
+        //función vinculada a ActualizarDataGridView
+        public DataTable ConsultaReservasActividad(int idActividad)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Reservas.IDCliente, Cliente.NombreCli, Cliente.ApellidoCli, Reservas.FechaReserva, Reservas.HoraReserva, Reservas.PosicionEnCola " +
+                               "FROM Reservas " +
+                               "INNER JOIN Actividades ON Reservas.IDActividad = Actividades.IDActividad " +
+                               "INNER JOIN Cliente ON Reservas.IDCliente = Cliente.IDCliente " +
+                               "WHERE Reservas.IDActividad = @idActividad " +
+                               "ORDER BY Reservas.PosicionEnCola";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idActividad", idActividad);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+
 
 
 

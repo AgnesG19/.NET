@@ -35,6 +35,7 @@
             this.button3_salir = new System.Windows.Forms.Button();
             this.comboBox1_Actividades = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1_Titulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +70,6 @@
             this.label1_AdminSesion.Size = new System.Drawing.Size(105, 13);
             this.label1_AdminSesion.TabIndex = 2;
             this.label1_AdminSesion.Text = "Sesión Administrador";
-            this.label1_AdminSesion.Click += new System.EventHandler(this.label1_Click);
             // 
             // button3_salir
             // 
@@ -80,16 +80,19 @@
             this.button3_salir.TabIndex = 3;
             this.button3_salir.Text = "Cerrar Sesión";
             this.button3_salir.UseVisualStyleBackColor = true;
+            this.button3_salir.Click += new System.EventHandler(this.button3_salir_Click);
             // 
             // comboBox1_Actividades
             // 
             this.comboBox1_Actividades.AccessibleName = "";
+            this.comboBox1_Actividades.DisplayMember = "IDActividad";
             this.comboBox1_Actividades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.comboBox1_Actividades.FormattingEnabled = true;
-            this.comboBox1_Actividades.Location = new System.Drawing.Point(690, 150);
+            this.comboBox1_Actividades.Location = new System.Drawing.Point(694, 176);
             this.comboBox1_Actividades.Name = "comboBox1_Actividades";
             this.comboBox1_Actividades.Size = new System.Drawing.Size(255, 28);
             this.comboBox1_Actividades.TabIndex = 4;
+            this.comboBox1_Actividades.ValueMember = "IDActividad";
             this.comboBox1_Actividades.Visible = false;
             this.comboBox1_Actividades.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -98,8 +101,21 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(282, 278);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(1109, 631);
             this.dataGridView1.TabIndex = 5;
+            // 
+            // label1_Titulo
+            // 
+            this.label1_Titulo.AutoSize = true;
+            this.label1_Titulo.BackColor = System.Drawing.Color.Transparent;
+            this.label1_Titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.25F);
+            this.label1_Titulo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1_Titulo.Location = new System.Drawing.Point(598, 89);
+            this.label1_Titulo.Name = "label1_Titulo";
+            this.label1_Titulo.Size = new System.Drawing.Size(459, 39);
+            this.label1_Titulo.TabIndex = 6;
+            this.label1_Titulo.Text = "SELECIONA LA ACTIVIDAD";
+            this.label1_Titulo.Visible = false;
             // 
             // MenuAdmin
             // 
@@ -107,6 +123,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::GenteFit.Properties.Resources.bg_menu;
             this.ClientSize = new System.Drawing.Size(1440, 1023);
+            this.Controls.Add(this.label1_Titulo);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1_Actividades);
             this.Controls.Add(this.button3_salir);
@@ -130,5 +147,6 @@
         private System.Windows.Forms.Button button3_salir;
         private System.Windows.Forms.ComboBox comboBox1_Actividades;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1_Titulo;
     }
 }
