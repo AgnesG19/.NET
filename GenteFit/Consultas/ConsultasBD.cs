@@ -98,10 +98,11 @@ namespace GenteFit.Consultas
 
         //******* FORMS-MENU ADMINISTRADOR *******//
 
+        // ******** BTN 1 - LISTA DE ESPERA DE X ACTIVIDAD
+
         //MOSTRAR LAS ACTIVIDADES en la ComboBox para selecionar luego.
         public DataTable ConsultaActividades()
         {
-            
             string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -118,59 +119,54 @@ namespace GenteFit.Consultas
             return dt;
         }
 
-        //INSERTAR RESERVA en la TABLA RESERVA
-        public void InsertarReserva(int idCliente, int idActividad, DateTime fecha, DateTime hora, int posicion)
+        //Obtener la información de la LISTA DE ESPERA de UNA ACTIVIDAD ESPECIFICA
+        //función vinculada a DataGridView
+        public void MostrarListaEspera(int idActividad, DataGridView dataGridView)
         {
+            // Obtener las reservas para la actividad seleccionada
+            string queryReservas = "SELECT FechaReserva, HoraReserva, IDCliente, PosicionEnCola FROM Reservas WHERE IDActividad = @IDActividad";
+            List<string[]> reservas = new List<string[]>();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                SqlCommand commandReservas = new SqlCommand(queryReservas, connection);
+                commandReservas.Parameters.AddWithValue("@IDActividad", idActividad);
 
-                string query = "INSERT INTO Reservas (IDCliente, IDActividad, Fecha, Hora, Posicion) " +
-                               "VALUES (@idCliente, @idActividad, @fecha, @hora, @posicion)";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                SqlDataReader reader = commandReservas.ExecuteReader();
+                while (reader.Read())
                 {
-                    command.Parameters.AddWithValue("@idCliente", idCliente);
-                    command.Parameters.AddWithValue("@idActividad", idActividad);
-                    command.Parameters.AddWithValue("@fecha", fecha);
-                    command.Parameters.AddWithValue("@hora", hora);
-                    command.Parameters.AddWithValue("@posicion", posicion);
+                    string fecha = reader.GetDateTime(0).ToString("yyyy-MM-dd");
+                    string hora = reader.GetTimeSpan(1).ToString();
+                    string idCliente = reader.GetInt32(2).ToString();
+                    string posicionCola = reader.GetInt32(3).ToString();
 
-                    command.ExecuteNonQuery();
+                    string[] reserva = { fecha, hora, idCliente, posicionCola };
+                    reservas.Add(reserva);
                 }
+                reader.Close();
             }
-        }
 
-        //Obtener la información de las reservas de UNA ACTIVIDAD ESPECIFICA
-        //función vinculada a ActualizarDataGridView
-        public DataTable ConsultaReservasActividad(int idActividad)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Limpiar las filas y columnas existentes en la DataGridView
+            dataGridView.Rows.Clear();
+            dataGridView.Columns.Clear();
+
+            // Agregar las columnas necesarias a la DataGridView
+            dataGridView.Columns.Add("FechaReserva", "Fecha Reserva");
+            dataGridView.Columns.Add("HoraReserva", "Hora Reserva");
+            dataGridView.Columns.Add("IDCliente", "ID Cliente");
+            dataGridView.Columns.Add("PosicionEnCola", "Posición en Cola");
+
+            // Mostrar los datos en la DataGridView
+            foreach (string[] reserva in reservas)
             {
-                connection.Open();
-
-                string query = "SELECT Reservas.IDCliente, Cliente.NombreCli, Cliente.ApellidoCli, Reservas.FechaReserva, Reservas.HoraReserva, Reservas.PosicionEnCola " +
-                               "FROM Reservas " +
-                               "INNER JOIN Actividades ON Reservas.IDActividad = Actividades.IDActividad " +
-                               "INNER JOIN Cliente ON Reservas.IDCliente = Cliente.IDCliente " +
-                               "WHERE Reservas.IDActividad = @idActividad " +
-                               "ORDER BY Reservas.PosicionEnCola";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@idActividad", idActividad);
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        return dt;
-                    }
-                }
+                dataGridView.Rows.Add(reserva);
             }
         }
 
 
+
+        // ******** BTN 2 - CONSULTA LISTA DE RESERVAS DE X ACTIVIDAD
 
 
     }

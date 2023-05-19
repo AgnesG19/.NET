@@ -20,79 +20,67 @@ namespace GenteFit
         public MenuAdmin()
         {
             InitializeComponent();
+            //comboBox1_Actividades.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
-           
 
-        //Click en btn Lista de Espera y se muestra ComBox con las Actividades
+        private string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
+
+        //******** BTN Lista de Espera y se muestran los botones con las Actividades y la Grid
         private void button1_ListaEspera_Click(object sender, EventArgs e)
         {
-            comboBox1_Actividades.Visible = true;
+            //comboBox1_Actividades.Visible = true;
             label1_Titulo.Visible = true;
+            dataGridView1.Visible = true;
+
+            button_Boxing.Visible = true;
+            button_Pilates.Visible = true;
+            button_Spinning.Visible = true;
+            button_Crossfit.Visible = true;
 
             // Obtener las actividades desde la base de datos y configurar la ComboBox1
-            ConsultasBD consultasBD = new ConsultasBD("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
+            ConsultasBD consultasBD = new ConsultasBD(connectionString);
             DataTable dt = consultasBD.ConsultaActividades();
-            comboBox1_Actividades.DataSource = dt;
-            comboBox1_Actividades.DisplayMember = "NombreAct";
-            comboBox1_Actividades.ValueMember = "IDActividad";
+            //comboBox1_Actividades.DataSource = dt;
+            //comboBox1_Actividades.DisplayMember = "NombreAct";
+            //comboBox1_Actividades.ValueMember = "IDActividad";
         }
 
-        //DESPLEGABLE con las ACTIVIDADES Y CARGA LA FUNCION DE CONSULTA RESERVAS
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //********* BOTONES con las ACTIVIDADES Y CARGA LA FUNCION DE LISTA DE ESPERA de las ACTIVIDADES
+        private void button_boxing_Click(object sender, EventArgs e)
         {
-            int idActividad = Convert.ToInt32(comboBox1_Actividades.SelectedValue);
+            int idActividad = 1; // El ID de la actividad Boxing
 
-            try
-            {
-                ConsultasBD consultasBD = new ConsultasBD("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
-                DataTable dt = consultasBD.ConsultaReservasActividad(idActividad);
+            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            consultasBD.MostrarListaEspera(idActividad, dataGridView1);
+        }
 
+        private void button1_Pilates_Click(object sender, EventArgs e)
+        {
+            int idActividad = 2; // El ID de la actividad Pilates
 
-                if (dt.Rows.Count > 0)
-                {
-                    dataGridView1.DataSource = dt;
-                }
-                else
-                {
-                    MessageBox.Show("No se encontraron reservas para la actividad seleccionada");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Ocurrió un error al cargar los datos: " + ex.Message);
-                MessageBox.Show("Ocurrió un error al cargar los datos. Por favor, inténtelo de nuevo.");
-            }
+            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            consultasBD.MostrarListaEspera(idActividad, dataGridView1);
+        }
+
+        private void button1_Spinning_Click(object sender, EventArgs e)
+        {
+            int idActividad = 3; // El ID de la actividad Spinning
+
+            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            consultasBD.MostrarListaEspera(idActividad, dataGridView1);
+        }
+        private void button1_Crossfit_Click(object sender, EventArgs e)
+        {
+            int idActividad = 4; // El ID de la actividad Crossfit
+
+            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            consultasBD.MostrarListaEspera(idActividad, dataGridView1);
         }
 
 
 
-
-        //DATAGRIDVIEW Actualiza los datos de la tabla.
-        //private void ActualizarDataGridView(int idActividad, DataTable dt)
-        //{
-        //    try
-        //    {
-        //        // Limpiar la DataGridView
-        //        dataGridView1.Rows.Clear();
-        //        dataGridView1.Refresh();
-
-        //        // Asignar la fuente de datos
-        //        dataGridView1.DataSource = dt;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Imprimir información adicional sobre la excepción
-        //        Debug.WriteLine("Error al asignar la fuente de datos a la DataGridView:");
-        //        Debug.WriteLine("Tabla: " + dt.TableName);
-        //        Debug.WriteLine("Columna que falta: " + ex.Message);
-
-        //        // Mostrar un mensaje de error al usuario
-        //        MessageBox.Show("Ocurrió un error al cargar los datos.");
-        //    }
-        //}
-
-        //BTN PARA CERRAR SESION
+        //*************** BTN PARA CERRAR SESION
         private void button3_salir_Click(object sender, EventArgs e)
         {
             // Mostrar la ventana de inicio de sesión
@@ -105,5 +93,37 @@ namespace GenteFit
         }
 
 
+
+
+
+
+
+
+        //DESPLEGABLE con las ACTIVIDADES Y CARGA LA FUNCION DE CONSULTA RESERVAS (NO FUNCIONO POR CULPA DE LA COMBOBOX)
+        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string actividadSeleccionada = comboBox1_Actividades.SelectedItem.ToString();
+
+        //    // Obtener el ID de la actividad seleccionada
+        //    string queryActividad = "SELECT IDActividad FROM Actividades WHERE NombreAct = @NombreAct";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        SqlCommand commandActividad = new SqlCommand(queryActividad, connection);
+        //        commandActividad.Parameters.AddWithValue("@NombreAct", actividadSeleccionada);
+        //        object result = commandActividad.ExecuteScalar();
+
+        //        if (result != null && result != DBNull.Value && int.TryParse(result.ToString(), out int idActividad))
+        //        {
+        //            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+        //            consultasBD.MostrarListaEspera(idActividad, dataGridView1);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("La actividad seleccionada no existe.");
+        //            return;
+        //        }
+        //    }
+        //}
     }
 }
