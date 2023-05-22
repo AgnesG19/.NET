@@ -25,7 +25,7 @@ namespace GenteFit
 
         private string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
 
-        //********* BTN 1 CREAR ACTIVIDAD
+        //************** BTN 1 CREAR ACTIVIDAD ***********************//
         private void button_CrearAct_Click(object sender, EventArgs e)
         {
             //Mostrar texto y textboxes
@@ -51,9 +51,21 @@ namespace GenteFit
 
             button_Guardar.Visible = true;
 
+            //FALSE de los otros botones por si se quedan visibles.
+            label1_Titulo.Visible = false;
+            dataGridView1.Visible = false;
+            button_Boxing.Visible = false;
+            button_Pilates.Visible = false;
+            button_Spinning.Visible = false;
+            button_Crossfit.Visible = false;
+            dataGridView_Reservas.Visible = false;
+            label_MostrarReservas.Visible = false;
+            dataGridView_Reservas.Visible = false;
+            label_MostrarReservas.Visible = false;
+
         }
 
-        //******** BTN 2 LISTA DE ESPERA
+        //************** BTN 2 LISTA DE ESPERA ***********************//
         private void button1_ListaEspera_Click(object sender, EventArgs e)
         {
             //comboBox1_Actividades.Visible = true;
@@ -64,6 +76,24 @@ namespace GenteFit
             button_Pilates.Visible = true;
             button_Spinning.Visible = true;
             button_Crossfit.Visible = true;
+
+            //FALSE de los otros botones por si se quedan visibles.
+            label_CrearAct.Visible = false;
+            label_NombreAct.Visible = false;
+            textBox_NombreAct.Visible = false;
+            label_Descripcion.Visible = false;
+            textBox_Descripcion.Visible = false;
+            label_Instructor.Visible = false;
+            textBox_Instructor.Visible = false;
+            label_Plazas.Visible = false;
+            textBox_Plazas.Visible = false;
+            label_Fecha.Visible = false;
+            dateTimePicker_Date.Visible = false;
+            label_Hora.Visible = false;
+            dateTimePicker_Time.Visible = false;
+            button_Guardar.Visible = false;
+            dataGridView_Reservas.Visible = false;
+            label_MostrarReservas.Visible = false;
 
             // Obtener las actividades desde la base de datos y configurar la ComboBox1
             ConsultasBD consultasBD = new ConsultasBD(connectionString);
@@ -118,7 +148,7 @@ namespace GenteFit
             dateTimePicker_Time.Value = DateTime.Now.Date;
         }
 
-
+        // BTN Guarda la informacion introducida en las TABLAS Actividad/InstanciasActividad
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             try
@@ -161,7 +191,54 @@ namespace GenteFit
 
 
 
+        //************** BTN 3 CONSULTA RESERVAS ***********************//
+        private void button_ConsultarReservas_Click(object sender, EventArgs e)
+        {
+            dataGridView_Reservas.Visible = true;
+            label_MostrarReservas.Visible = true;
 
+            //FALSE de los otros botones por si se quedan visibles.
+            label_CrearAct.Visible = false;
+            label_NombreAct.Visible = false;
+            textBox_NombreAct.Visible = false;
+            label_Descripcion.Visible = false;
+            textBox_Descripcion.Visible = false;
+            label_Instructor.Visible = false;
+            textBox_Instructor.Visible = false;
+            label_Plazas.Visible = false;
+            textBox_Plazas.Visible = false;
+            label_Fecha.Visible = false;
+            dateTimePicker_Date.Visible = false;
+            label_Hora.Visible = false;
+            dateTimePicker_Time.Visible = false;
+            button_Guardar.Visible = false;
+            label_CrearAct.Visible = false;
+            label_NombreAct.Visible = false;
+            textBox_NombreAct.Visible = false;
+            label_Descripcion.Visible = false;
+            textBox_Descripcion.Visible = false;
+            label_Instructor.Visible = false;
+            textBox_Instructor.Visible = false;
+            label_Plazas.Visible = false;
+            textBox_Plazas.Visible = false;
+            label_Fecha.Visible = false;
+            dateTimePicker_Date.Visible = false;
+            label_Hora.Visible = false;
+            dateTimePicker_Time.Visible = false;
+            button_Guardar.Visible = false;
+            label1_Titulo.Visible = false;
+            dataGridView1.Visible = false;
+            button_Boxing.Visible = false;
+            button_Pilates.Visible = false;
+            button_Spinning.Visible = false;
+            button_Crossfit.Visible = false;
+
+            // Obtener las reservas de la base de datos
+            DataTable reservas = ConsultasBD.ObtenerReservas();
+
+            // Asignar los datos al DataGridView
+            dataGridView_Reservas.DataSource = reservas;
+        }
 
 
         //*************** BTN PARA CERRAR SESION
@@ -175,20 +252,6 @@ namespace GenteFit
             MenuAdmin formAdmin = new MenuAdmin();
             formAdmin.Close();
         }
-
-        private void button_ConsultarReservas_Click(object sender, EventArgs e)
-        {
-            dataGridView_Reservas.Visible = true;
-            label_MostrarReservas.Visible=true;
-
-            // Obtener las reservas de la base de datos
-            DataTable reservas = ConsultasBD.ObtenerReservas();
-
-            // Asignar los datos al DataGridView
-            dataGridView_Reservas.DataSource = reservas;
-        }
-
-
 
 
 
