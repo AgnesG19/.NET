@@ -23,10 +23,37 @@ namespace GenteFit
             //comboBox1_Actividades.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
-
         private string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
 
-        //******** BTN Lista de Espera y se muestran los botones con las Actividades y la Grid
+        //********* BTN 1 CREAR ACTIVIDAD
+        private void button_CrearAct_Click(object sender, EventArgs e)
+        {
+            //Mostrar texto y textboxes
+            label_CrearAct.Visible = true;
+
+            label_NombreAct.Visible = true;
+            textBox_NombreAct.Visible = true;
+
+            label_Descripcion.Visible = true;
+            textBox_Descripcion.Visible = true;
+
+            label_Instructor.Visible = true;
+            textBox_Instructor.Visible = true;
+
+            label_Plazas.Visible = true;
+            textBox_Plazas.Visible = true;
+
+            label_Fecha.Visible = true;
+            dateTimePicker_Date.Visible = true;
+
+            label_Hora.Visible = true;
+            dateTimePicker_Time.Visible = true;
+
+            button_Guardar.Visible = true;
+
+        }
+
+        //******** BTN 2 LISTA DE ESPERA
         private void button1_ListaEspera_Click(object sender, EventArgs e)
         {
             //comboBox1_Actividades.Visible = true;
@@ -79,9 +106,66 @@ namespace GenteFit
         }
 
 
+        //PARA LIMPIAR LA INFO DE LAS TEXTBOX EN MENU ADMIN - CREAR ACTIVIDAD
+        private void LimpiarCampos()
+        {
+            textBox_NombreAct.Text = string.Empty;
+            textBox_Descripcion.Text = string.Empty;
+            textBox_Instructor.Text = string.Empty;
+            textBox_Plazas.Text = string.Empty;
+     
+            dateTimePicker_Date.Value = DateTime.Now;
+            dateTimePicker_Time.Value = DateTime.Now.Date;
+        }
+
+
+        private void button_Guardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Recuperar los valores de los controles
+                string nombreActividad = textBox_NombreAct.Text;
+                string descripcion = textBox_Descripcion.Text;
+                string instructor = textBox_Instructor.Text;
+                int plazas = int.Parse(textBox_Plazas.Text);
+                DateTime fecha = dateTimePicker_Date.Value;
+                TimeSpan hora = dateTimePicker_Time.Value.TimeOfDay;
+
+                // Comprobar si la actividad ya existe
+                bool actividadExistente = ConsultasBD.ComprobarActividad(nombreActividad, descripcion, instructor, plazas, fecha, hora);
+
+                if (actividadExistente)
+                {
+                    // La actividad ya existe, insertar en la tabla InstanciasActividad
+                    ConsultasBD.InsertarInstanciaActividad(nombreActividad, descripcion, instructor, plazas, fecha, hora);
+                }
+                else
+                {
+                    // La actividad no existe, insertar en la tabla Actividades y luego en la tabla InstanciasActividad
+                    ConsultasBD.InsertarActividad(nombreActividad, descripcion, instructor, plazas);
+                    ConsultasBD.InsertarInstanciaActividad(nombreActividad, descripcion, instructor, plazas, fecha, hora);
+                }
+
+                // Limpiar los campos después de guardar
+                LimpiarCampos();
+
+                // Mostrar mensaje de éxito
+                MessageBox.Show("Los datos se guardaron correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Mostrar mensaje de error
+                MessageBox.Show("Error al guardar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
 
         //*************** BTN PARA CERRAR SESION
-        private void button3_salir_Click(object sender, EventArgs e)
+        private void button_salir_Click(object sender, EventArgs e)
         {
             // Mostrar la ventana de inicio de sesión
             Inicio formInicio = new Inicio();
@@ -92,8 +176,17 @@ namespace GenteFit
             formAdmin.Close();
         }
 
+        private void button_ConsultarReservas_Click(object sender, EventArgs e)
+        {
+            dataGridView_Reservas.Visible = true;
+            label_MostrarReservas.Visible=true;
 
+            // Obtener las reservas de la base de datos
+            DataTable reservas = ConsultasBD.ObtenerReservas();
 
+            // Asignar los datos al DataGridView
+            dataGridView_Reservas.DataSource = reservas;
+        }
 
 
 

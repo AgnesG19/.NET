@@ -13,18 +13,19 @@ namespace GenteFit.Consultas
 {
     internal class ConsultasBD
     {
-        private string connectionString;
+       
         private ConexionBD conexion;
+        private static string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
+        private string connectionString1;
 
-
-        public ConsultasBD(string connectionString)
+        public ConsultasBD(string connectionString1)
         {
-            this.connectionString = connectionString;
-            this.conexion = new ConexionBD();
-
+            this.connectionString1 = connectionString1;
         }
 
-    //******* FORMS-INICIO APP *******//
+
+
+        //******* FORMS-INICIO APP *******//
         //Comprueba si ya existe el Mail y la Contraseña en las tablas CLIENTE Y ADMINISTRADOR (INICIO SESION)
         public bool VerificarExistencia(string email, string contrasena)
         {
@@ -93,17 +94,102 @@ namespace GenteFit.Consultas
         }
 
 
-        //*******************************************************************************//
+        //*******************************************************************************************//
 
 
         //******* FORMS-MENU ADMINISTRADOR *******//
 
-        // ******** BTN 1 - LISTA DE ESPERA DE X ACTIVIDAD
+        // ******** BTN 1 - CREAR ACTIVIDAD
+
+        //Comprueba si hay X Actividad creada en la BD para no sobrescribir, luego sino está se guarda en la TABA INSTANCIASACTIVIDADES.
+        public static bool ComprobarActividad(string nombreActividad, string descripcion, string instructor, int plazas, DateTime fecha, TimeSpan hora)
+        {
+            
+            // Realiza la conexión a la base de datos
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Construye la sentencia SQL para comprobar la existencia de la actividad
+                string query = "SELECT COUNT(*) FROM Actividades WHERE NombreAct = @NombreAct AND Descripcion = @Descripcion AND Instructor = @Instructor AND Plazas = @Plazas";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Asigna los valores a los parámetros de la sentencia SQL
+                command.Parameters.AddWithValue("@NombreAct", nombreActividad);
+                command.Parameters.AddWithValue("@Descripcion", descripcion);
+                command.Parameters.AddWithValue("@Instructor", instructor);
+                command.Parameters.AddWithValue("@Plazas", plazas);
+
+                // Abre la conexión y ejecuta la sentencia SQL
+                connection.Open();
+                int count = (int)command.ExecuteScalar();
+
+                // Si count es mayor que 0, la actividad ya existe
+                return count > 0;
+            }
+        }
+
+        //INSERTAR INSTANCIA DE ACT. en la Tabla.
+        public static void InsertarInstanciaActividad(string nombreActividad, string descripcion, string instructor, int plazas, DateTime fecha, TimeSpan hora)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Obtener el ID de la actividad
+                string actividadQuery = "SELECT IDActividad FROM Actividades WHERE NombreAct = @NombreAct AND Descripcion = @Descripcion AND Instructor = @Instructor AND Plazas = @Plazas";
+                SqlCommand actividadCommand = new SqlCommand(actividadQuery, connection);
+                actividadCommand.Parameters.AddWithValue("@NombreAct", nombreActividad);
+                actividadCommand.Parameters.AddWithValue("@Descripcion", descripcion);
+                actividadCommand.Parameters.AddWithValue("@Instructor", instructor);
+                actividadCommand.Parameters.AddWithValue("@Plazas", plazas);
+
+                int idActividad = (int)actividadCommand.ExecuteScalar();
+
+                // Insertar en la tabla InstanciasActividad
+                string insertInstanciaQuery = "INSERT INTO InstanciasActividad (IDActividad, Fecha, Hora) VALUES (@IDActividad, @Fecha, @Hora)";
+                SqlCommand insertInstanciaCommand = new SqlCommand(insertInstanciaQuery, connection);
+                insertInstanciaCommand.Parameters.AddWithValue("@IDActividad", idActividad);
+                insertInstanciaCommand.Parameters.AddWithValue("@Fecha", fecha);
+                insertInstanciaCommand.Parameters.AddWithValue("@Hora", hora);
+
+                insertInstanciaCommand.ExecuteNonQuery();
+
+                connection.Close();
+            }
+        }
+
+
+        //INSERTAR ACTIVIDAD en la Tabla.
+        public static void InsertarActividad(string nombreActividad, string descripcion, string instructor, int plazas)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Insertar en la tabla Actividades
+                string query = "INSERT INTO Actividades (NombreAct, Descripcion, Instructor, Plazas) VALUES (@NombreAct, @Descripcion, @Instructor, @Plazas)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Asignar los valores a los parámetros de la sentencia SQL
+                command.Parameters.AddWithValue("@NombreAct", nombreActividad);
+                command.Parameters.AddWithValue("@Descripcion", descripcion);
+                command.Parameters.AddWithValue("@Instructor", instructor);
+                command.Parameters.AddWithValue("@Plazas", plazas);
+
+                // Abrir la conexión y ejecutar la sentencia SQL
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        
+
+
+
+
+        // ************* BTN 2 - LISTA DE ESPERA DE X ACTIVIDAD
 
         //MOSTRAR LAS ACTIVIDADES en la ComboBox para selecionar luego.
         public DataTable ConsultaActividades()
         {
-            string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
+            
             SqlConnection connection = new SqlConnection(connectionString);
 
             // Crear el comando SQL para obtener las actividades
@@ -166,8 +252,24 @@ namespace GenteFit.Consultas
 
 
 
-        // ******** BTN 2 - CONSULTA LISTA DE RESERVAS DE X ACTIVIDAD
+        // ******** BTN 3 - CONSULTA LISTA DE RESERVAS DE X ACTIVIDAD
 
+        //Muestra la Tabla RESERVAS
+        public static DataTable ObtenerReservas()
+        {
+            string query = "SELECT * FROM Reservas";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+            }
+        }
 
     }
 }
