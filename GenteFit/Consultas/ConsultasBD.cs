@@ -8,20 +8,33 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using GenteFit.BBDD;
 using System.Data;
+using GenteFit.Entidades;
+using System.Globalization;
+using System.Web;
 
 namespace GenteFit.Consultas
 {
     internal class ConsultasBD
     {
        
+        //private ConexionBD conexion;
+        //private static string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
+        //private string connectionString;
+
+        //public ConsultasBD(string connectionString)
+        //{
+        //    this.connectionString = connectionString;
+        //    this.conexion = new ConexionBD(connectionString);
+        //}
+
         private ConexionBD conexion;
         private static string connectionString = "Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True";
-        private string connectionString1;
 
-        public ConsultasBD(string connectionString1)
+        public ConsultasBD()
         {
-            this.connectionString1 = connectionString1;
+            this.conexion = new ConexionBD(connectionString); // Inicializa la variable conexion con una instancia de ConexionBD
         }
+
 
 
 
@@ -29,7 +42,7 @@ namespace GenteFit.Consultas
         //Comprueba si ya existe el Mail y la Contraseña en las tablas CLIENTE Y ADMINISTRADOR (INICIO SESION)
         public bool VerificarExistencia(string email, string contrasena)
         {
-            using (SqlConnection connection = this.conexion.GetConnection()) // obtiene la conexión a la base de datos desde la instancia de ConexionBD
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -38,7 +51,20 @@ namespace GenteFit.Consultas
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@Contrasena", contrasena);
                     int count = (int)command.ExecuteScalar();
-                    return count > 0;
+
+                    if (count > 0)
+                    {
+                        // Actualizar la columna SesionIniciada a true
+                        SqlCommand updateCommand = new SqlCommand("UPDATE Cliente SET SesionIniciada = 1 WHERE MailCli = @Email", connection);
+                        updateCommand.Parameters.AddWithValue("@Email", email);
+                        updateCommand.ExecuteNonQuery();
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -47,10 +73,13 @@ namespace GenteFit.Consultas
                 }
             }
         }
+
+
+
         //Comprueba el TIPO DE USUARIO para acceder luego a un Menu (ACCEDER APP)
         public string ObtenerTipoUsuario(string email)
         {
-            using (SqlConnection connection = new SqlConnection("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True"))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -71,7 +100,7 @@ namespace GenteFit.Consultas
         //Registra al Cliente como Usuario con sus datos (REGISTRO)
         public bool RegistrarUsuario(string nombre, string apellido, string email, string telefono, string contrasena)
         {
-            using (SqlConnection connection = this.conexion.GetConnection())
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -179,14 +208,12 @@ namespace GenteFit.Consultas
             }
         }
 
-        
-
-
+       
 
 
         // ************* BTN 2 - LISTA DE ESPERA DE X ACTIVIDAD
 
-        //MOSTRAR LAS ACTIVIDADES en la ComboBox para selecionar luego.
+        //MOSTRAR LAS ACTIVIDADES en la Tabla para selecionar luego.
         public DataTable ConsultaActividades()
         {
             
@@ -270,6 +297,360 @@ namespace GenteFit.Consultas
                 }
             }
         }
+
+
+        //*******************************************************************************************//
+
+
+        //******* FORMS-MENU CLIENTE *******//
+
+        //LISTA de la Tabla INSTANCIASACT para que el cliente pueda reservar
+        public List<InstanciasActividad> ObtenerInstanciasActividadesDisponibles()
+        {
+            List<InstanciasActividad> instanciasDisponibles = new List<InstanciasActividad>();
+            bool error = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT IA.IDInstanciaActividad, IA.IDActividad, IA.Fecha, IA.Hora, A.NombreAct, A.Descripcion, A.Instructor, A.Plazas " +
+                                   "FROM InstanciasActividad IA " +
+                                   "INNER JOIN Actividades A ON IA.IDActividad = A.IDActividad ";
+                                   //"WHERE CONVERT(date, IA.Fecha) >= CONVERT(date, GETDATE()) AND A.Plazas > 0";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int idInstanciaActividad = (int)reader["IDInstanciaActividad"];
+                        int idActividad = (int)reader["IDActividad"];
+                        DateTime fecha = (DateTime)reader["Fecha"];
+                        TimeSpan hora = (TimeSpan)reader["Hora"];
+                        string nombreActividad = reader.GetString(reader.GetOrdinal("NombreAct"));
+                        string descripcion = reader.GetString(reader.GetOrdinal("Descripcion"));
+                        string instructor = reader.GetString(reader.GetOrdinal("Instructor"));
+                        int plazas = reader.GetInt32(reader.GetOrdinal("Plazas"));
+
+                        //string horaString = reader.GetString(reader.GetOrdinal("Hora"));
+                        //TimeSpan hora = TimeSpan.ParseExact(horaString, "HH:mm:ss", CultureInfo.InvariantCulture);
+
+                        //TimeSpan hora = (TimeSpan)reader["Hora"];
+
+                        InstanciasActividad instancia = new InstanciasActividad
+                        {
+                            IdInstanciaActividad = idInstanciaActividad,
+                            IdActividad = idActividad,
+                            Fecha = fecha,
+                            Hora = hora,
+                            NombreAct = nombreActividad,
+                            Descripcion = descripcion,
+                            Instructor = instructor,
+                            Plazas = plazas
+                        };
+
+                        instanciasDisponibles.Add(instancia);
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                MessageBox.Show("Error al cargar las instancias de actividad: " + ex.Message);
+            }
+
+            if (error)
+            {
+                MessageBox.Show("No se pudieron cargar las instancias de actividad. Por favor, inténtalo de nuevo más tarde.");
+            }
+
+            return instanciasDisponibles;
+        }
+
+
+        //Comprueba qué cliente ha iniciado sesion para obtener su mail
+        public static Cliente ObtenerClienteActual()
+        {
+            Cliente clienteActual = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Consulta para obtener el cliente actualmente conectado
+                    string query = "SELECT * FROM Cliente WHERE SesionIniciada = 1";
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        clienteActual = new Cliente();
+                        clienteActual.IDCliente = Convert.ToInt32(reader["IDCliente"]);
+                        clienteActual.MailCli = reader["MailCli"].ToString();
+                        
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el cliente actual: " + ex.Message);
+            }
+
+            return clienteActual;
+        }
+
+        public static int ObtenerIdCliente()
+        {
+            int idCliente = 0;
+
+            try
+            {
+                Cliente clienteActual = ObtenerClienteActual();
+                if (clienteActual != null)
+                {
+                    idCliente = clienteActual.IDCliente;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID del cliente: " + ex.Message);
+            }
+
+            return idCliente;
+        }
+
+
+        //se hace la RESERVA de la InstanciaActividad selecionada en la DataGridView
+        public static bool RealizarReserva(int idCliente, InstanciasActividad instancia, DateTime fechaReserva, TimeSpan horaReserva)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("INSERT INTO Reservas (IDCliente, IDActividad, FechaReserva, HoraReserva, IDInstanciaActividad)" +
+                        "VALUES (@IDCliente, @IDActividad, @FechaReserva, @HoraReserva, @IDInstanciaActividad)", connection);
+                    command.Parameters.AddWithValue("@IDCliente", idCliente);
+                    command.Parameters.AddWithValue("@IDActividad", instancia.IdActividad);
+                    command.Parameters.AddWithValue("@FechaReserva", fechaReserva);
+                    command.Parameters.AddWithValue("@HoraReserva", horaReserva);
+                    command.Parameters.AddWithValue("@IDInstanciaActividad", instancia.IdInstanciaActividad);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al realizar la reserva: " + ex.Message);
+                return false;
+            }
+        }
+
+        //ELIMINA la RESERVA DEL CLIENTE
+        public static bool EliminarReserva(int idReserva)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("DELETE FROM Reservas WHERE IDReserva = @IDReserva", connection);
+                    command.Parameters.AddWithValue("@IDReserva", idReserva);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar la reserva: " + ex.Message);
+                return false;
+            }
+        }
+
+        //Actualiza la DatGridView para evitar confusiones.
+        //public static void ActualizarListaReservasCliente(DataGridView dataGridView_ReservaCli, int idCliente)
+        //{
+        //    // Limpiar la DataGridView
+        //    dataGridView_ReservaCli.Rows.Clear();
+
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            connection.Open();
+
+        //            // Consulta para obtener las reservas del cliente
+        //            string query = @"SELECT Reservas.IDReserva, Actividades.NombreAct, Reservas.FechaReserva, Reservas.HoraReserva
+        //                     FROM Reservas
+        //                     INNER JOIN Actividades ON Reservas.IDActividad = Actividades.IDActividad
+        //                     WHERE Reservas.IDCliente = @IDCliente";
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            command.Parameters.AddWithValue("@IDCliente", idCliente);
+
+        //            SqlDataReader reader = command.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                int idReserva = Convert.ToInt32(reader["IDReserva"]);
+        //                string nombreActividad = reader["NombreAct"].ToString();
+        //                DateTime fechaReserva = Convert.ToDateTime(reader["FechaReserva"]);
+        //                TimeSpan horaReserva = TimeSpan.Parse(reader["HoraReserva"].ToString());
+
+        //                dataGridView_ReservaCli.Rows.Add(idReserva, nombreActividad, fechaReserva, horaReserva);
+        //            }
+
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al mostrar las reservas del cliente: " + ex.Message);
+        //    }
+        //}
+        public static void ActualizarListaReservasCliente(DataGridView dataGridView_ReservaCli, int idCliente)
+        {
+            try
+            {
+                // Limpiar la fuente de datos del DataGridView
+                dataGridView_ReservaCli.DataSource = null;
+
+                // Obtener las reservas del cliente
+                List<Reserva> reservas = ConsultasBD.ObtenerReservasCliente(idCliente);
+
+                // Asignar las reservas como fuente de datos del DataGridView
+                dataGridView_ReservaCli.DataSource = reservas;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al mostrar las reservas del cliente: " + ex.Message);
+            }
+        }
+
+
+
+
+        public static List<Reserva> ObtenerReservasCliente(int idCliente)
+        {
+            List<Reserva> reservas = new List<Reserva>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = @"SELECT Reservas.IDReserva, Actividades.IDActividad, Reservas.IDInstanciaActividad, Reservas.FechaReserva, Reservas.HoraReserva
+                             FROM Reservas
+                             INNER JOIN Actividades ON Reservas.IDActividad = Actividades.IDActividad
+                             WHERE Reservas.IDCliente = @IDCliente";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@IDCliente", idCliente);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Reserva reserva = new Reserva();
+                        reserva.IDReserva = Convert.ToInt32(reader["IDReserva"]);
+                        reserva.IDCliente = idCliente;
+                        reserva.IDActividad = Convert.ToInt32(reader["IDActividad"]);
+                        reserva.IDInstanciaActividad = Convert.ToInt32(reader["IDInstanciaActividad"]);
+                        reserva.FechaReserva = Convert.ToDateTime(reader["FechaReserva"]);
+                        reserva.HoraReserva = TimeSpan.Parse(reader["HoraReserva"].ToString());
+
+                        reservas.Add(reserva);
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las reservas del cliente: " + ex.Message);
+            }
+
+            return reservas;
+        }
+
+
+
+
+        ////Obtener el IDCliente para poder almacenar las Reservas en su perfil
+        //public static int ObtenerIdCliente(string correoElectronico)
+        //{
+        //    int idCliente = 0; // Valor inicial del IDCliente
+
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            connection.Open();
+
+        //            string query = "SELECT IDCliente FROM Clientes WHERE MailCli = @CorreoElectronico";
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            command.Parameters.AddWithValue("@CorreoElectronico", correoElectronico);
+
+        //            object result = command.ExecuteScalar();
+        //            if (result != null && result != DBNull.Value)
+        //            {
+        //                idCliente = Convert.ToInt32(result);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al obtener el ID del cliente: " + ex.Message);
+        //    }
+
+        //    return idCliente;
+        //}
+
+
+
+
+        //public static void ActualizarPosicionesEnCola(int posicionBorrada)
+        //{
+        //    // Obtener los clientes en cola por debajo de la posición borrada
+        //    string query = "SELECT IDCliente, ColaReserva FROM Cliente WHERE ColaReserva > @Posicion ORDER BY ColaReserva ASC";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@Posicion", posicionBorrada);
+        //            connection.Open();
+        //            SqlDataReader reader = command.ExecuteReader();
+
+        //            // Actualizar las posiciones en cola de los clientes por debajo
+        //            while (reader.Read())
+        //            {
+        //                int clienteId = (int)reader["IDCliente"];
+        //                int posicionCola = (int)reader["ColaReserva"];
+        //                int nuevaPosicion = posicionCola - 1;
+
+        //                // Actualizar la posición en cola del cliente en la base de datos
+        //                string updateQuery = "UPDATE Cliente SET ColaReserva = @NuevaPosicion WHERE IDCliente = @ClienteID";
+        //                using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+        //                {
+        //                    updateCommand.Parameters.AddWithValue("@NuevaPosicion", nuevaPosicion);
+        //                    updateCommand.Parameters.AddWithValue("@ClienteID", clienteId);
+        //                    updateCommand.ExecuteNonQuery();
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
 
     }
 }

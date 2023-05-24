@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,7 +77,9 @@
     <Compile Include="Entidades\Actividades.cs" />
     <Compile Include="Entidades\Administrador.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\InstanciasActividad.cs" />
     <Compile Include="Entidades\Instructor.cs" />
+    <Compile Include="Entidades\Reserva.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,11 +89,11 @@
     <Compile Include="Instructor.cs">
       <DependentUpon>Model_BD.tt</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipal.cs">
+    <Compile Include="MenuCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuPrincipal.Designer.cs">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <Compile Include="MenuCliente.Designer.cs">
+      <DependentUpon>MenuCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuAdmin.cs">
       <SubType>Form</SubType>
@@ -124,8 +127,8 @@
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPrincipal.resx">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="MenuCliente.resx">
+      <DependentUpon>MenuCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuAdmin.resx">
       <DependentUpon>MenuAdmin.cs</DependentUpon>

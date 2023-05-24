@@ -96,7 +96,7 @@ namespace GenteFit
             label_MostrarReservas.Visible = false;
 
             // Obtener las actividades desde la base de datos y configurar la ComboBox1
-            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            ConsultasBD consultasBD = new ConsultasBD();
             DataTable dt = consultasBD.ConsultaActividades();
             //comboBox1_Actividades.DataSource = dt;
             //comboBox1_Actividades.DisplayMember = "NombreAct";
@@ -108,7 +108,7 @@ namespace GenteFit
         {
             int idActividad = 1; // El ID de la actividad Boxing
 
-            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            ConsultasBD consultasBD = new ConsultasBD();
             consultasBD.MostrarListaEspera(idActividad, dataGridView1);
         }
 
@@ -116,7 +116,7 @@ namespace GenteFit
         {
             int idActividad = 2; // El ID de la actividad Pilates
 
-            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            ConsultasBD consultasBD = new ConsultasBD();
             consultasBD.MostrarListaEspera(idActividad, dataGridView1);
         }
 
@@ -124,14 +124,14 @@ namespace GenteFit
         {
             int idActividad = 3; // El ID de la actividad Spinning
 
-            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            ConsultasBD consultasBD = new ConsultasBD();
             consultasBD.MostrarListaEspera(idActividad, dataGridView1);
         }
         private void button1_Crossfit_Click(object sender, EventArgs e)
         {
             int idActividad = 4; // El ID de la actividad Crossfit
 
-            ConsultasBD consultasBD = new ConsultasBD(connectionString);
+            ConsultasBD consultasBD = new ConsultasBD();
             consultasBD.MostrarListaEspera(idActividad, dataGridView1);
         }
 

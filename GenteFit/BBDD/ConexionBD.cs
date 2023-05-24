@@ -11,11 +11,16 @@ namespace GenteFit.BBDD
     internal class ConexionBD{
 
         private SqlConnection BD;
-
+        private string connectionString;
 
         public ConexionBD()
         {
             this.BD = new SqlConnection("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
+        }
+
+        public ConexionBD(string connectionString)
+        {
+            this.connectionString = connectionString;
         }
 
         public bool Conectar()
@@ -29,17 +34,17 @@ namespace GenteFit.BBDD
                 return false;
             }
         }
+
         public void Desconectar()
         {
             this.BD.Close();
             
         }
 
-        public SqlConnection GetConnection()
-        {
-            return BD;
-        }
-
+        //public SqlConnection GetConnection()
+        //{
+        //    return BD;
+        //}
 
     }
 

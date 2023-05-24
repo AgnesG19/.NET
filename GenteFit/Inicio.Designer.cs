@@ -100,7 +100,7 @@
             this.label1_Title.Size = new System.Drawing.Size(483, 123);
             this.label1_Title.TabIndex = 3;
             this.label1_Title.Text = "GENTEFIT";
-            this.label1_Title.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // label2_Email
             // 
@@ -127,7 +127,7 @@
             this.label2_Contrasena.TabIndex = 5;
             this.label2_Contrasena.Text = "Contraseña";
             this.label2_Contrasena.Visible = false;
-            this.label2_Contrasena.Click += new System.EventHandler(this.label2_Click);
+            
             // 
             // textBox2_Email
             // 
@@ -190,7 +190,7 @@
             this.label1_nombre.TabIndex = 10;
             this.label1_nombre.Text = "Nombre";
             this.label1_nombre.Visible = false;
-            this.label1_nombre.Click += new System.EventHandler(this.label1_Click_1);
+            
             // 
             // textBox1_Nombre
             // 
@@ -226,7 +226,6 @@
             this.label3_email.TabIndex = 13;
             this.label3_email.Text = "Email";
             this.label3_email.Visible = false;
-            this.label3_email.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // label4_telefono
             // 
@@ -240,7 +239,7 @@
             this.label4_telefono.TabIndex = 14;
             this.label4_telefono.Text = "Telefono";
             this.label4_telefono.Visible = false;
-            this.label4_telefono.Click += new System.EventHandler(this.label3_Click);
+            
             // 
             // label5_contrasena
             // 
@@ -321,7 +320,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Inicio";
             this.Text = "Inicio";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

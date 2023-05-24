@@ -22,6 +22,9 @@ namespace GenteFit.Entidades
         public string ContrasenaPerfil { get; set; }
         public int ReservasActivas { get; set; }
         public int ColaReserva { get; set; }
+        public int SesionIniciada { get; set; }
 
     }
+
+
 }

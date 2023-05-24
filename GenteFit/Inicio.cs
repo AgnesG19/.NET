@@ -51,21 +51,7 @@ namespace GenteFit
             button1_GuardarDatosRegistro.Visible = false;
 
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+     
 
         //BOTON ACCEDER, primero verifica el tipo de usuario para ir a un Menu o otro
         private void button1_Click_1(object sender, EventArgs e)
@@ -73,7 +59,7 @@ namespace GenteFit
             string email = textBox2_Email.Text;
             string contrasena = textBox3_Contrasena.Text;
 
-            ConsultasBD consultas = new ConsultasBD("Data Source=Franky-PC\\NET;Initial Catalog=GenteFITBD;Integrated Security=True");
+            ConsultasBD consultas = new ConsultasBD();
 
             // Verificar existencia del usuario
             if (consultas.VerificarExistencia(email, contrasena))
@@ -84,7 +70,7 @@ namespace GenteFit
                 // Abrir Menu correspondiente según el tipo de usuario
                 if (tipoUsuario == "Cliente")
                 {
-                    MenuPrincipal MenuPrincipal = new MenuPrincipal();
+                    MenuCliente MenuPrincipal = new MenuCliente();
                     MenuPrincipal.Show();
                 }
                 else if (tipoUsuario == "Administrador")
@@ -113,23 +99,6 @@ namespace GenteFit
         //}
 
     
-
-
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Regis_Click(object sender, EventArgs e)
         {
@@ -164,7 +133,7 @@ namespace GenteFit
             string telefono = textBox4_Telefono.Text;
             string contrasena = textBox5_Contrasena.Text;
 
-            ConsultasBD consultas = new ConsultasBD("");
+            ConsultasBD consultas = new ConsultasBD();
 
             if (consultas.RegistrarUsuario(nombre, apellido, email, telefono, contrasena))
             {

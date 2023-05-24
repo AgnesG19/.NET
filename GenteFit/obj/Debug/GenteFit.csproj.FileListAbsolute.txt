@@ -16,5 +16,5 @@ A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.SqlServer.dll
 A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.xml
 A:\Program Files\Code\NET\.NET\GenteFit\bin\Debug\EntityFramework.SqlServer.xml
 A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.Inicio.resources
-A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.MenuPrincipal.resources
 A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.MenuAdmin.resources
+A:\Program Files\Code\NET\.NET\GenteFit\obj\Debug\GenteFit.MenuCliente.resources
