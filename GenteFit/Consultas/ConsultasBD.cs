@@ -304,6 +304,7 @@ namespace GenteFit.Consultas
 
         //******* FORMS-MENU CLIENTE *******//
 
+        // ************* BTN 1 ACTIVIDAD
         //LISTA de la Tabla INSTANCIASACT para que el cliente pueda reservar
         public List<InstanciasActividad> ObtenerInstanciasActividadesDisponibles()
         {
@@ -319,7 +320,6 @@ namespace GenteFit.Consultas
                     string query = "SELECT IA.IDInstanciaActividad, IA.IDActividad, IA.Fecha, IA.Hora, A.NombreAct, A.Descripcion, A.Instructor, A.Plazas " +
                                    "FROM InstanciasActividad IA " +
                                    "INNER JOIN Actividades A ON IA.IDActividad = A.IDActividad ";
-                                   //"WHERE CONVERT(date, IA.Fecha) >= CONVERT(date, GETDATE()) AND A.Plazas > 0";
 
                     SqlCommand command = new SqlCommand(query, connection);
                     SqlDataReader reader = command.ExecuteReader();
@@ -334,11 +334,6 @@ namespace GenteFit.Consultas
                         string descripcion = reader.GetString(reader.GetOrdinal("Descripcion"));
                         string instructor = reader.GetString(reader.GetOrdinal("Instructor"));
                         int plazas = reader.GetInt32(reader.GetOrdinal("Plazas"));
-
-                        //string horaString = reader.GetString(reader.GetOrdinal("Hora"));
-                        //TimeSpan hora = TimeSpan.ParseExact(horaString, "HH:mm:ss", CultureInfo.InvariantCulture);
-
-                        //TimeSpan hora = (TimeSpan)reader["Hora"];
 
                         InstanciasActividad instancia = new InstanciasActividad
                         {
@@ -427,9 +422,8 @@ namespace GenteFit.Consultas
 
             return idCliente;
         }
-
-
-        //se hace la RESERVA de la InstanciaActividad selecionada en la DataGridView
+        
+        //REALIZAR RESERVAS INSTANCIAS selecionada en la DataGridView
         public static bool RealizarReserva(int idCliente, InstanciasActividad instancia, DateTime fechaReserva, TimeSpan horaReserva)
         {
             try
@@ -456,6 +450,8 @@ namespace GenteFit.Consultas
             }
         }
 
+        // BTN  2 - MOSTRAR RESERVAS
+
         //ELIMINA la RESERVA DEL CLIENTE
         public static bool EliminarReserva(int idReserva)
         {
@@ -478,45 +474,8 @@ namespace GenteFit.Consultas
             }
         }
 
-        //Actualiza la DatGridView para evitar confusiones.
-        //public static void ActualizarListaReservasCliente(DataGridView dataGridView_ReservaCli, int idCliente)
-        //{
-        //    // Limpiar la DataGridView
-        //    dataGridView_ReservaCli.Rows.Clear();
-
-        //    try
-        //    {
-        //        using (SqlConnection connection = new SqlConnection(connectionString))
-        //        {
-        //            connection.Open();
-
-        //            // Consulta para obtener las reservas del cliente
-        //            string query = @"SELECT Reservas.IDReserva, Actividades.NombreAct, Reservas.FechaReserva, Reservas.HoraReserva
-        //                     FROM Reservas
-        //                     INNER JOIN Actividades ON Reservas.IDActividad = Actividades.IDActividad
-        //                     WHERE Reservas.IDCliente = @IDCliente";
-        //            SqlCommand command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@IDCliente", idCliente);
-
-        //            SqlDataReader reader = command.ExecuteReader();
-        //            while (reader.Read())
-        //            {
-        //                int idReserva = Convert.ToInt32(reader["IDReserva"]);
-        //                string nombreActividad = reader["NombreAct"].ToString();
-        //                DateTime fechaReserva = Convert.ToDateTime(reader["FechaReserva"]);
-        //                TimeSpan horaReserva = TimeSpan.Parse(reader["HoraReserva"].ToString());
-
-        //                dataGridView_ReservaCli.Rows.Add(idReserva, nombreActividad, fechaReserva, horaReserva);
-        //            }
-
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error al mostrar las reservas del cliente: " + ex.Message);
-        //    }
-        //}
+      
+        //ACTUALIZA la DataGrid de Mostrar Reservas 
         public static void ActualizarListaReservasCliente(DataGridView dataGridView_ReservaCli, int idCliente)
         {
             try
@@ -536,9 +495,7 @@ namespace GenteFit.Consultas
             }
         }
 
-
-
-
+        //Obten la lista de Reservas del Cliente en el que estamos la sesion.
         public static List<Reserva> ObtenerReservasCliente(int idCliente)
         {
             List<Reserva> reservas = new List<Reserva>();
